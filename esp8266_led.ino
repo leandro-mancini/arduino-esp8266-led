@@ -32,18 +32,24 @@
 #define REMOTEXY_SERVER_PORT 6377 
 
 
-// Configuração de RemoteXY
+// RemoteXY configurate   
 #pragma pack(push, 1) 
 uint8_t RemoteXY_CONF[] = 
-  { 255,1,0,0,0,20,0,8,13,1,
-  2,0,23,43,22,11,2,26,31,31,
-  79,78,0,79,70,70,0 }; 
+  { 255,3,0,0,0,54,0,8,13,1,
+  2,0,20,15,22,11,2,26,31,31,
+  79,78,0,79,70,70,0,2,0,20,
+  41,22,11,2,26,31,31,79,78,0,
+  79,70,70,0,2,0,20,69,22,11,
+  2,26,31,31,79,78,0,79,70,70,
+  0 }; 
    
 // this structure defines all the variables of your control interface  
 struct { 
 
     // input variable
   uint8_t switch_1; // =1 if switch ON and =0 if OFF 
+  uint8_t switch_2; // =1 if switch ON and =0 if OFF 
+  uint8_t switch_3; // =1 if switch ON and =0 if OFF 
 
     // other variable
   uint8_t connect_flag;  // =1 if wire connected, else =0 
@@ -56,6 +62,8 @@ struct {
 ///////////////////////////////////////////// 
 
 #define PIN_SWITCH_1 13
+#define PIN_SWITCH_2 12
+#define PIN_SWITCH_3 11
 
 
 void setup()  
@@ -63,6 +71,8 @@ void setup()
   RemoteXY_Init ();  
    
   pinMode (PIN_SWITCH_1, OUTPUT);
+  pinMode (PIN_SWITCH_2, OUTPUT);
+  pinMode (PIN_SWITCH_3, OUTPUT);
    
   // TODO you setup code 
    
@@ -73,6 +83,8 @@ void loop()
   RemoteXY_Handler (); 
    
   digitalWrite(PIN_SWITCH_1, (RemoteXY.switch_1==0)?LOW:HIGH);
+  digitalWrite(PIN_SWITCH_2, (RemoteXY.switch_2==0)?LOW:HIGH);
+  digitalWrite(PIN_SWITCH_3, (RemoteXY.switch_3==0)?LOW:HIGH);
    
   // TODO you loop code 
   // use the RemoteXY structure for data transfer 
